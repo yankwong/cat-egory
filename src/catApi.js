@@ -1,6 +1,16 @@
 import axios from 'axios'
 
-export function fetchRandomCat() {
-  // TODO - fetch json from the http://aws.random.cat/meow or a similar random cat API
-  throw new Error("not implemented")
+export function fetchRandomCat(thingToDoAfter) {
+  const apiUrl = 'http://aws.random.cat/meow';
+
+  axios.get(apiUrl)
+
+  .then(response => {
+    const catImageUrl = response.data.file
+    thingToDoAfter(null, catImageUrl);
+  })
+
+  .catch(error => {
+    thingToDoAfter(error, null);
+  });
 }
